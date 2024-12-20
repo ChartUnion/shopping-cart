@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="shop">
+    <div class="product" id="product1">
+      <img src="assets/image1.png" alt="Quantum Convergence System">
+      <div class="product-info">
+        <h3>Quantum Convergence System</h3>
+        <p>Subscription type: Yearly Plan</p>
+        <p>$182.40/unit</p>
+      </div>
+      <div class="product-controls">
+        <button onclick="updateQuantity('product1', 'subtract')">-</button>
+        <span id="product1-quantity">0</span>
+        <button onclick="updateQuantity('product1', 'add')">+</button>
+        <p id="product1-total">$0.00</p>
+        <button onclick="removeItem('product1')">Remove</button>
+      </div>
+    </div>
+    <!-- Add other products here -->
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
