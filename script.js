@@ -66,27 +66,3 @@ function applyDiscount() {
 
   updateCart();
 }
-
-// PayPal Integration
-paypal.Buttons({
-  createOrder: function (data, actions) {
-    const total = parseFloat(document.getElementById('total').innerText.replace('$', ''));
-    return actions.order.create({
-      purchase_units: [
-        {
-          amount: {
-            value: total.toFixed(2),
-          },
-        },
-      ],
-    });
-  },
-  onApprove: function (data, actions) {
-    return actions.order.capture().then(function (details) {
-      alert('Payment successful! Thank you, ' + details.payer.name.given_name);
-      cart = {}; // Clear the cart
-      discountValue = 0; // Reset discount
-      updateCart();
-    });
-  },
-}).render('#paypal-button-container');
