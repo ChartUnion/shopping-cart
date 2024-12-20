@@ -62,8 +62,18 @@
       margin: 10px 0;
     }
 
-    #paypal-button-container {
+    #checkout-button {
+      display: block;
+      width: 100%;
+      padding: 10px;
       margin-top: 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
     }
 
     #discount-section {
@@ -90,38 +100,133 @@
       margin-top: 10px;
       font-size: 14px;
     }
-
-    /* Embedding iframe section */
-    #embed-test {
-      margin-top: 30px;
-      padding: 20px;
-      background-color: #2a2a2a;
-      border-radius: 8px;
-      border: 1px solid #444;
-    }
-
-    iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-      margin-top: 10px;
-    }
   </style>
 </head>
 <body>
   <div id="shop">
-    <!-- Existing shopping cart products... -->
+    <!-- Product 1 -->
+    <div class="product" id="product1">
+      <img src="quantum-yearly.png" alt="Quantum Convergence Yearly Plan">
+      <div class="product-info">
+        <h3>Quantum Convergence System</h3>
+        <p>Subscription type: Yearly Plan</p>
+        <p>$182.40/unit</p>
+      </div>
+      <div class="product-controls">
+        <button onclick="updateQuantity('product1', 'subtract')">-</button>
+        <span id="product1-quantity">0</span>
+        <button onclick="updateQuantity('product1', 'add')">+</button>
+        <p id="product1-total">$0.00</p>
+        <button onclick="removeItem('product1')">Remove</button>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product" id="product2">
+      <img src="quantum-monthly.png" alt="Quantum Convergence Monthly Plan">
+      <div class="product-info">
+        <h3>Quantum Convergence System</h3>
+        <p>Subscription type: Monthly Plan</p>
+        <p>$19.00/unit</p>
+      </div>
+      <div class="product-controls">
+        <button onclick="updateQuantity('product2', 'subtract')">-</button>
+        <span id="product2-quantity">0</span>
+        <button onclick="updateQuantity('product2', 'add')">+</button>
+        <p id="product2-total">$0.00</p>
+        <button onclick="removeItem('product2')">Remove</button>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product" id="product3">
+      <img src="coaching-hour.png" alt="Training & Coaching Per Hour">
+      <div class="product-info">
+        <h3>Training & Coaching</h3>
+        <p>Type: Per Hour</p>
+        <p>$90.00/hour</p>
+      </div>
+      <div class="product-controls">
+        <button onclick="updateQuantity('product3', 'subtract')">-</button>
+        <span id="product3-quantity">0</span>
+        <button onclick="updateQuantity('product3', 'add')">+</button>
+        <p id="product3-total">$0.00</p>
+        <button onclick="removeItem('product3')">Remove</button>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="product" id="product4">
+      <img src="coaching-bundle.png" alt="Training & Coaching Bundle">
+      <div class="product-info">
+        <h3>Training & Coaching</h3>
+        <p>Type: 10-Hour Bundle</p>
+        <p>$720.00/unit</p>
+      </div>
+      <div class="product-controls">
+        <button onclick="updateQuantity('product4', 'subtract')">-</button>
+        <span id="product4-quantity">0</span>
+        <button onclick="updateQuantity('product4', 'add')">+</button>
+        <p id="product4-total">$0.00</p>
+        <button onclick="removeItem('product4')">Remove</button>
+      </div>
+    </div>
+
+    <!-- Product 5 -->
+    <div class="product" id="product5">
+      <img src="exit-plan-existing.png" alt="Exit Plan Existing">
+      <div class="product-info">
+        <h3>Exit Plan</h3>
+        <p>Type: Existing</p>
+        <p>$275.00/plan</p>
+      </div>
+      <div class="product-controls">
+        <button onclick="updateQuantity('product5', 'subtract')">-</button>
+        <span id="product5-quantity">0</span>
+        <button onclick="updateQuantity('product5', 'add')">+</button>
+        <p id="product5-total">$0.00</p>
+        <button onclick="removeItem('product5')">Remove</button>
+      </div>
+    </div>
+
+    <!-- Product 6 -->
+    <div class="product" id="product6">
+      <img src="exit-plan-proposal.png" alt="Exit Plan Proposal">
+      <div class="product-info">
+        <h3>Exit Plan</h3>
+        <p>Type: Proposal</p>
+        <p>$345.00/plan</p>
+      </div>
+      <div class="product-controls">
+        <button onclick="updateQuantity('product6', 'subtract')">-</button>
+        <span id="product6-quantity">0</span>
+        <button onclick="updateQuantity('product6', 'add')">+</button>
+        <p id="product6-total">$0.00</p>
+        <button onclick="removeItem('product6')">Remove</button>
+      </div>
+    </div>
   </div>
 
-  <!-- Embedding Test Section -->
-  <div id="embed-test">
-    <h3>Iframe Embed Test</h3>
-    <p>This iframe tests if the GitHub Pages URL can be embedded:</p>
-    <iframe src="https://chartunion.github.io/shopping-cart/"></iframe>
+  <!-- Discount Section -->
+  <div id="discount-section">
+    <h3>Discount Code</h3>
+    <input type="text" id="discount-code" placeholder="Enter discount code">
+    <button onclick="applyDiscount()">Apply</button>
+    <p id="discount-message"></p>
   </div>
+
+  <!-- Order Summary -->
+  <div id="order-summary">
+    <h3>Order Summary</h3>
+    <p>Subtotal: <span id="subtotal">$0.00</span></p>
+    <p>Discount: <span id="discount">$0.00</span></p>
+    <p>Total: <span id="total">$0.00</span></p>
+  </div>
+
+  <!-- Checkout Button -->
+  <a id="checkout-button" href="#" onclick="checkout()">Checkout</a>
 
   <script>
-    // JavaScript for shopping cart (unchanged)
     let cart = {};
     let discountValue = 0;
 
@@ -189,29 +294,19 @@
       updateCart();
     }
 
-    paypal.Buttons({
-      createOrder: function (data, actions) {
-        const total = parseFloat(document.getElementById('total').innerText.replace('$', ''));
-        return actions.order.create({
-          purchase_units: [
-            {
-              amount: {
-                value: total.toFixed(2),
-              },
-            },
-          ],
-        });
-      },
-      onApprove: function (data, actions) {
-        return actions.order.capture().then(function (details) {
-          alert('Payment successful! Thank you, ' + details.payer.name.given_name);
-          cart = {};
-          discountValue = 0;
-          updateCart();
-        });
-      },
-    }).render('#paypal-button-container');
+    function checkout() {
+      const queryParams = new URLSearchParams();
+      queryParams.append('cart', JSON.stringify(cart));
+      queryParams.append('discount', discountValue);
+
+      const subtotal = document.getElementById('subtotal').innerText;
+      const total = document.getElementById('total').innerText;
+
+      queryParams.append('subtotal', subtotal);
+      queryParams.append('total', total);
+
+      window.location.href = `checkout.html?${queryParams.toString()}`;
+    }
   </script>
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
 </body>
 </html>
